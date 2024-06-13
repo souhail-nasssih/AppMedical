@@ -3,10 +3,13 @@
 use App\Http\Controllers\DetailOrdAnalyseRadioController;
 use App\Http\Controllers\DetailOrdMedController;
 use App\Http\Controllers\InfoPatientController;
+use App\Http\Controllers\MedecinController;
+use App\Http\Controllers\MedecinPatientController;
 use App\Http\Controllers\OrdAnaliseRadioController;
 use App\Http\Controllers\OrdMedicamentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Medecin;
 use App\Models\OrdMedicament;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +75,8 @@ Route::delete('/detailanalyses/{id}', [DetailOrdAnalyseRadioController::class, '
 Route::get('/analyse/{id}/consult', [DetailOrdAnalyseRadioController::class, 'consult'])->name('analyses.consult');
 Route::delete('/Ord/{id}', [OrdMedicamentController::class, 'destroy'])->name('detailOrd.destroy');
 Route::delete('/ordAnalyse/{id}',[OrdAnaliseRadioController::class, 'destroy'])->name('detailOrdalayse.destroy');
+Route::post('/ajoute-patient',[MedecinPatientController::class, 'store'])->name('medecin.patient.store');
+Route::get('/medecin/profile/{id}', [MedecinController::class, 'show'])->name('medecin.show');
 
 
 

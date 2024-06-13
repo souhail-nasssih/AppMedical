@@ -29,12 +29,14 @@
                                 <tbody>
                                     @foreach ($patients as $patient)
                                         <tr>
-                                            <td>{{ $patient->name }}</td>
+                                            <td>{{ $patient->user->name }}</td>
                                             <td>{{ $patient->date_naissance }}</td>
                                             <td>{{ $patient->adress }}</td>
                                             <td>{{ $patient->tel }}</td>
                                             <td class="text-right">
                                                 <!-- Ajoutez ici les liens pour les actions spécifiques à chaque patient -->
+                                                <a href="{{ route('patients.show', $patient->id) }}"
+                                                    class="btn btn-primary btn-sm">Consulter</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('medecin_id')->constrained();
             $table->foreignId('patient_id')->constrained();
             $table->timestamps();
+            $table->unique(['medecin_id', 'patient_id']);
+
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedecinPatient;
 use Illuminate\Http\Request;
 
 class MedecinPatientController extends Controller
@@ -27,7 +28,30 @@ class MedecinPatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'medecin_id' => 'required|exists:medecins,id',
+            'patient_id' => 'required|exists:patients,id',
+        ]);
+
+        $medecinId = $request->input('medecin_id');
+        $patientId = $request->input('patient_id');
+
+        // Vérifie si l'association existe déjà
+        $exists = MedecinPatient::where('medecin_id', $medecinId)
+                                ->where('patient_id', $patientId)
+                                ->exists();
+
+        if (!$exists) {
+            MedecinPatient::create([
+                'medecin_id' => $medecinId,
+                'patient_id' => $patientId,
+            ]);
+
+            return redirect()->back()->with('success', 'Patient ajouté avec succès au médecin.');
+        } else {
+            return redirect()->back()->with('error', 'Ce Patient existe déjà.');
+        }
+    
     }
 
     /**

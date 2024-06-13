@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medecin;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MedecinController extends Controller
@@ -43,7 +44,18 @@ class MedecinController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Récupérer l'utilisateur avec le médecin associé
+        $user = User::with('medecin')->find($id);
+
+        // Vérifier si l'utilisateur existe
+        if (!$user) {
+            abort(404, 'User not found');
+        }
+
+        // Vérifier si l'utilisateur est associé à un médecin
+        $medecin = $user->medecin;
+
+        return view('medecin.profil', compact('medecin'));
     }
 
     /**

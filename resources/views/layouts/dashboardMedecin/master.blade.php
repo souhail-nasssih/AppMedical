@@ -38,7 +38,7 @@
                         <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}">My Profile</a>
+                        <a class="dropdown-item" href="{{ route('medecin.show',Auth::user()->id) }}">My Profile</a>
                         <!-- For the logout route, use a form to handle the POST request -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

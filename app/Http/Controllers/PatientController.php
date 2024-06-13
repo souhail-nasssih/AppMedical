@@ -26,13 +26,17 @@ class PatientController extends Controller
     }
     public function indexPatient()
     {
-        // Récupérer l'utilisateur authentifié (médecin)
-        $user = Auth::user();
+        $medecin = Auth::user()->medecin;
 
-        // Récupérer tous les patients associés à ce médecin
-        $patients = $user->patients;
+        if ($medecin) {
+            $patients = Patient::whereHas('medecins', function ($query) use ($medecin) {
+                $query->where('medecins.id', $medecin->id);
+            })->get();
 
-        return view('medecin.listePatients', compact('patients'));
+            return view('medecin.listePatients', compact('patients'));
+        } else {
+            return redirect()->back()->with('error', 'Médecin non trouvé.');
+        }
     }
 
 
