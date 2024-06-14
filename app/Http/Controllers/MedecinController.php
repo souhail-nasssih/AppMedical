@@ -6,8 +6,11 @@ use App\Models\Medecin;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class MedecinController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -15,7 +18,13 @@ class MedecinController extends Controller
     {
         //page admin dashbord
         return redirect(Route('dashboard'));
-
+    
+    }
+    public function indexMedecin()
+    {
+        //page admin dashbord
+        $medecins = Medecin::all();
+        return view('admin.listeDoctor',compact('medecins'));
     
     }
 

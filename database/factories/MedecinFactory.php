@@ -25,7 +25,7 @@ class MedecinFactory extends Factory
             'adress' => $this->faker->address,
             'N_professionel' => $this->faker->unique()->numerify('N###'),
             'specialite' => $this->faker->randomElement(['Cardiologie', 'Pédiatrie', 'Dermatologie']),
-            'verification' => $this->faker->boolean(),
+            'verification' => false, // Définir à false par défaut
             'user_id' => function () {
                 return User::factory()->create(['role' => 'medecin'])->id;
             },

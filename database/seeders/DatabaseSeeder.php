@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use App\Models\Medecin;
 use App\Models\Patient;
 use App\Models\User;
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
 
         // Créer 50 patients avec des utilisateurs associés
         Patient::factory(50)->create();
+        Admin::factory(1)->create();
     }
 }

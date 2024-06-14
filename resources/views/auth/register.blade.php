@@ -18,7 +18,7 @@
             <!-- Role -->
         <!-- Hidden Role Input -->
         <div>
-            <x-text-input id="role" class="block mt-1 w-full" type="text" name="role" :value="request()->query('role', old('role'))" />
+            <x-text-input id="role" class="block mt-1 w-full" type="hidden" name="role" :value="request()->query('role', old('role'))" />
         </div>
             
             <!-- Password -->

@@ -18,6 +18,9 @@ class PatientFactory extends Factory
      */
     protected $model = Patient::class;
 
+    // Initialiser le compteur
+    private static $cinCounter = 100;
+
     public function definition()
     {
         return [
@@ -25,7 +28,7 @@ class PatientFactory extends Factory
             'tel' => $this->faker->phoneNumber,
             'adress' => $this->faker->address,
             'groupes_sanguins' => $this->faker->randomElement(['A+', 'B+', 'O+', 'AB+', 'A-', 'B-', 'O-', 'AB-']),
-            'CIN' => $this->faker->unique()->numerify('C#########'),
+            'CIN' => 'P' . self::$cinCounter++,  // Générer un CIN unique
             'user_id' => function () {
                 return User::factory()->create(['role' => 'patient'])->id;
             },

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DetailOrdAnalyseRadioController;
 use App\Http\Controllers\DetailOrdMedController;
 use App\Http\Controllers\InfoPatientController;
@@ -9,19 +10,20 @@ use App\Http\Controllers\OrdAnaliseRadioController;
 use App\Http\Controllers\OrdMedicamentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Medecin;
-use App\Models\OrdMedicament;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-// Route::get('/', function () {
-//     return view('medecin.listePatients');
-// })->name('listePatient');
+Route::get('/admin', function () {
+    return route('login');
+})->middleware('auth');
+Route::get('/admin/dashbord', function () {
+    return route('login');
+})->middleware('auth');
 
-Route::get('/liste-patient', [PatientController::class, 'indexPatient'])->name('listePatient');
+Route::get('/liste-patient', [PatientController::class, 'indexPatient'])->middleware('auth')->name('listePatient');
 
 
 
@@ -34,9 +36,13 @@ Route::get('/dashboard', function () {
     if ($user->role == 'medecin') {
         return view('medecin.dashboard');
     }
+    if ($user->role == 'admin') {
+        return view('admin.dashboard');
+    }
 
     return redirect()->route('home')->with('error', 'Invalid user role.');
 })->middleware(['auth'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -77,6 +83,7 @@ Route::delete('/Ord/{id}', [OrdMedicamentController::class, 'destroy'])->name('d
 Route::delete('/ordAnalyse/{id}',[OrdAnaliseRadioController::class, 'destroy'])->name('detailOrdalayse.destroy');
 Route::post('/ajoute-patient',[MedecinPatientController::class, 'store'])->name('medecin.patient.store');
 Route::get('/medecin/profile/{id}', [MedecinController::class, 'show'])->name('medecin.show');
+Route::get('/admin/medecin', [MedecinController::class, 'indexMedecin'])->name('liste.doctor');
 
 
 
