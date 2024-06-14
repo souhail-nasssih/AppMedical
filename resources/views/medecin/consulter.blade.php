@@ -4,7 +4,7 @@
     <div class="page-wrapper">
         <div class="content">
             <div class="row mb-3">
-                <a href="{{ route('search') }}" class="btn btn-primary btn">
+                <a href="{{ route('search') }}" class="btn btn-outline-primary take-btn">
                     <i class="fa fa-arrow-left mr-2"></i> Retour
                 </a>
                 <div class="col-sm-12">

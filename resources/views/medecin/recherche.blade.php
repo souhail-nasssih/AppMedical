@@ -5,7 +5,7 @@
         <div class="content">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4 class="page-title">Liste des Patients</h4>
+                    <h4 class="page-title">Patients</h4>
                 </div>
             </div>
             <!-- Affichage des messages de succès et d'erreur -->
@@ -35,20 +35,21 @@
                 <div class="col-sm-12">
                     <div class="card-box">
                         <div class="card-block">
+                            <div></div>
                             <h6 class="card-title font-weight-bold">Recherche de Patient par CIN</h6>
-                            <form action="" method="GET">
-                                <div class="row filter-row">
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="form-group form-focus">
-                                            <label class="focus-label">CIN Patient</label>
-                                            <input type="text" name="cin" class="form-control floating">
+                                <form action="" method="GET">
+                                    <div class="row filter-row">
+                                        <div class="col-sm-6 col-md-3">
+                                            <div class="form-group form-focus">
+                                                <label class="focus-label">CIN Patient</label>
+                                                <input type="text" name="cin" class="form-control floating">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-3">
+                                            <button type="submit" class="btn btn-success btn-block">Rechercher</button>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <button type="submit" class="btn btn-success btn-block">Rechercher</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
 
                             <div class="table-responsive">
                                 <table class="table table-striped datatable">

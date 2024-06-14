@@ -10,7 +10,7 @@
             </div>
 
             <div class="col-sm-5 col-6 text-right m-b-30">
-                <a href="edit-profile.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Profile</a>
+                <a href="{{ Route('profile.edit') }}" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Modifier Profile</a>
             </div>
         </div>
         <div class="card-box profile-header">
