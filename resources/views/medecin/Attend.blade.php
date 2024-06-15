@@ -18,7 +18,7 @@
             <h1>Attente</h1>
             <h3><i class="fa fa-hourglass-half"></i> Votre compte est en attente d'approbation</h3>
             <p>Votre demande d'inscription en tant que médecin est en cours de traitement par l'administrateur. Vous recevrez une notification une fois votre compte approuvé.</p>
-            <!-- <a href="{{ route('medecin.dashboard') }}" class="btn btn-primary go-home">Retour à l'accueil</a> -->
+            {{-- <!-- <a href="{{ route('medecin.dashboard') }}" class="btn btn-primary go-home">Retour à l'accueil</a> --> --}}
         </div>
     </div>
     <script src="{{ asset('dashboardMedecin/assets/js/jquery-3.2.1.min.js') }}"></script>

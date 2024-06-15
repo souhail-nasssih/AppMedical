@@ -16,12 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::get('/medecinAttend', function () {
+    return view('medecin.attend');
+})->name('medecinAttend');
+
+
 Route::get('/admin', function () {
     return route('login');
 })->middleware('auth');
+
+
 Route::get('/admin/dashbord', function () {
     return route('login');
 })->middleware('auth');
+
+
 
 Route::get('/liste-patient', [PatientController::class, 'indexPatient'])->middleware('auth')->name('listePatient');
 
@@ -30,7 +40,7 @@ Route::get('/liste-patient', [PatientController::class, 'indexPatient'])->middle
 Route::get('/dashboard', function () {
     $user = Auth::user();
     if ($user->role == 'patient') {
-        return view('patient.dashboard');   
+        return view('patient.dashboard');
     }
 
     if ($user->role == 'medecin') {
@@ -44,45 +54,56 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
- // Routes pour les patients
+// Routes pour les patients
 Route::prefix('patients')->middleware('auth')->group(function () {
     Route::get('/', [PatientController::class, 'index'])->name('patient');
     Route::get('/create', [PatientController::class, 'create'])->name('patient.create');
-    // Route::post('/', [PatientController::class, 'store'])->name('patient.store');
-    Route::get('/search', [PatientController::class, 'afficher'])->name('search');
     Route::get('/{id}', [PatientController::class, 'show'])->name('patients.show');
-    
     Route::get('/{id}/analyses', [PatientController::class, 'analyseStats'])->name('patients.analyse');
     Route::get('/{id}/maladies', [PatientController::class, 'maladieChroniqueStats'])->name('patients.maladie');
-    
-    
-    });
-Route::post('/patients', [OrdMedicamentController::class, 'store'])->name('ordMedicament.store');
-Route::post('/detailOrd', [DetailOrdMedController::class, 'store'])->name('detailOrdMed.store');
-Route::get('/detailOrd/{id}', [DetailOrdMedController::class, 'show'])->name('detailOrdMed.show');
-Route::delete('/detailOrd/{id}', [DetailOrdMedController::class, 'destroy'])->name('detailOrdMed.destroy');
-Route::get('/ordonnances/{id}/consult', [OrdMedicamentController::class, 'consult'])->name('ordonnances.consult');
+});
 
-// Route pour consulter les analyses d'un patient
-Route::get('/patients/{id}/analyses', [OrdAnaliseRadioController::class, 'index'])->name('patients.analyse');
+Route::middleware(['auth', 'verified.medecin'])->prefix('medecin')->group(function () {
+    // Routes pour PatientController
+    Route::get('/search', [PatientController::class, 'afficher'])->name('search');
+    Route::get('/{id}/radios', [PatientController::class, 'radios'])->name('patients.radios');
 
-// Route pour consulter les radios d'un patient
-Route::get('/patients/{id}/radios', [PatientController::class, 'radios'])->name('patients.radios');
+    // Routes pour OrdMedicamentController
+    Route::post('/ordMedicament', [OrdMedicamentController::class, 'store'])->name('ordMedicament.store');
+    Route::get('/ordonnances/{id}/consult', [OrdMedicamentController::class, 'consult'])->name('ordonnances.consult');
+    Route::delete('/Ord/{id}', [OrdMedicamentController::class, 'destroy'])->name('detailOrd.destroy');
 
-Route::post('/ordonnances/analyse-radio/store', [OrdAnaliseRadioController::class, 'store'])->name('ordAnalyseRadio.store');
-Route::get('/detailanalyses/{id}', [DetailOrdAnalyseRadioController::class, 'show'])->name('detailanalyses.show');
-Route::post('/detailanalyses', [DetailOrdAnalyseRadioController::class, 'store'])->name('detailanalyses.post');
-Route::delete('/detailanalyses/{id}', [DetailOrdAnalyseRadioController::class, 'destroy'])->name('detailanalyses.destroy');
-Route::get('/analyse/{id}/consult', [DetailOrdAnalyseRadioController::class, 'consult'])->name('analyses.consult');
-Route::delete('/Ord/{id}', [OrdMedicamentController::class, 'destroy'])->name('detailOrd.destroy');
-Route::delete('/ordAnalyse/{id}',[OrdAnaliseRadioController::class, 'destroy'])->name('detailOrdalayse.destroy');
-Route::post('/ajoute-patient',[MedecinPatientController::class, 'store'])->name('medecin.patient.store');
-Route::get('/medecin/profile/{id}', [MedecinController::class, 'show'])->name('medecin.show');
+    // Routes pour DetailOrdMedController
+    Route::post('/detailOrd', [DetailOrdMedController::class, 'store'])->name('detailOrdMed.store');
+    Route::get('/detailOrd/{id}', [DetailOrdMedController::class, 'show'])->name('detailOrdMed.show');
+    Route::delete('/detailOrd/{id}', [DetailOrdMedController::class, 'destroy'])->name('detailOrdMed.destroy');
+
+    // Routes pour OrdAnaliseRadioController
+    Route::get('/{id}/analyses', [OrdAnaliseRadioController::class, 'index'])->name('patients.analyse');
+    Route::post('/analyse-radio/store', [OrdAnaliseRadioController::class, 'store'])->name('ordAnalyseRadio.store');
+    Route::delete('/ordAnalyse/{id}', [OrdAnaliseRadioController::class, 'destroy'])->name('detailOrdalayse.destroy');
+
+    // Routes pour DetailOrdAnalyseRadioController
+    Route::get('/detailanalyses/{id}', [DetailOrdAnalyseRadioController::class, 'show'])->name('detailanalyses.show');
+    Route::post('/detailanalyses', [DetailOrdAnalyseRadioController::class, 'store'])->name('detailanalyses.post');
+    Route::delete('/detailanalyses/{id}', [DetailOrdAnalyseRadioController::class, 'destroy'])->name('detailanalyses.destroy');
+    Route::get('/analyse/{id}/consult', [DetailOrdAnalyseRadioController::class, 'consult'])->name('analyses.consult');
+
+    // Routes pour MedecinPatientController
+    Route::post('/ajoute-patient', [MedecinPatientController::class, 'store'])->name('medecin.patient.store');
+
+    // Routes pour MedecinController
+    Route::get('/profile/{id}', [MedecinController::class, 'show'])->name('medecin.show');
+});
+
+
+
+
 //route de admin
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/medecin', [AdminController::class, 'indexMedecin'])->name('liste.doctor');
@@ -100,3 +121,37 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 require __DIR__ . '/auth.php';
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('/medecin/search', [PatientController::class, 'afficher'])->name('search');
+// Route::post('/medecin/ordMedicament', [OrdMedicamentController::class, 'store'])->name('ordMedicament.store');
+// Route::post('/medecin/detailOrd', [DetailOrdMedController::class, 'store'])->name('detailOrdMed.store');
+// Route::get('/medecin/detailOrd/{id}', [DetailOrdMedController::class, 'show'])->name('detailOrdMed.show');
+// Route::delete('/medecin/detailOrd/{id}', [DetailOrdMedController::class, 'destroy'])->name('detailOrdMed.destroy');
+// Route::get('/medecin/ordonnances/{id}/consult', [OrdMedicamentController::class, 'consult'])->name('ordonnances.consult');
+
+// // Route pour consulter les analyses d'un patient
+// Route::get('/medecin/{id}/analyses', [OrdAnaliseRadioController::class, 'index'])->name('patients.analyse');
+
+// // Route pour consulter les radios d'un patient
+// Route::get('/medecin/{id}/radios', [PatientController::class, 'radios'])->name('patients.radios');
+
+// Route::post('/medecin/analyse-radio/store', [OrdAnaliseRadioController::class, 'store'])->name('ordAnalyseRadio.store');
+// Route::get('/medecin/detailanalyses/{id}', [DetailOrdAnalyseRadioController::class, 'show'])->name('detailanalyses.show');
+// Route::post('//mdecin/detailanalyses', [DetailOrdAnalyseRadioController::class, 'store'])->name('detailanalyses.post');
+// Route::delete('/medecin/detailanalyses/{id}', [DetailOrdAnalyseRadioController::class, 'destroy'])->name('detailanalyses.destroy');
+// Route::get('/medecin/analyse/{id}/consult', [DetailOrdAnalyseRadioController::class, 'consult'])->name('analyses.consult');
+// Route::delete('/medecin/Ord/{id}', [OrdMedicamentController::class, 'destroy'])->name('detailOrd.destroy');
+// Route::delete('/medecin/ordAnalyse/{id}',[OrdAnaliseRadioController::class, 'destroy'])->name('detailOrdalayse.destroy');
+// Route::post('/medecin/ajoute-patient',[MedecinPatientController::class, 'store'])->name('medecin.patient.store');
+// Route::get('/medecin/profile/{id}', [MedecinController::class, 'show'])->name('medecin.show');

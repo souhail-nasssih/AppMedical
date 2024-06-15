@@ -9,6 +9,11 @@
                         <div class="col-sm-12 d-flex justify-content-between align-items-center mb-3">
                             <h4 class="page-title">Detail Ordonnances</h4>
                         </div>
+                        <div>
+
+                            <button onclick="window.history.back();" class="btn btn-primary">Retour</button>
+                        </div>
+
                     </div>
                     <!-- Afficher le message de succès -->
                     @if (session('success'))

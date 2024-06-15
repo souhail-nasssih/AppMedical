@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkRole' => \App\Http\Middleware\CheckRoleParameter::class,
             'StorePreviousUrl'=> \App\Http\Middleware\StorePreviousUrl::class,
             'Role'=>\App\Http\Middleware\RoleMiddleware::class,
+            'verified.medecin' => \App\Http\Middleware\VerifiedMedecin::class,
+
 
 
 

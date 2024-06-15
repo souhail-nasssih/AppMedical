@@ -39,7 +39,7 @@ class DetailOrdMedController extends Controller
         $ordMedicamentId = $request->input('ordMedicament_id');
 
         // Rediriger vers la méthode show avec l'ID de l'ordonnance
-        return redirect()->route('detailOrdMed.show', ['id' => $ordMedicamentId])->with('success', 'Ordonnance ajoutée avec succès.');
+        return redirect()->back()->with('success', 'Ordonnance ajoutée avec succès.');
     }
     /**
      * Display the specified resource.
