@@ -38,7 +38,7 @@
                         <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('medecin.show',Auth::user()->id) }}">My Profile</a>
+                        <a class="dropdown-item" href="{{ route('admin.show',Auth::user()->id) }}">My Profile</a>
                         <!-- For the logout route, use a form to handle the POST request -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -76,18 +76,18 @@
                     <ul>
                         <li>
                             <a href="{{ Route('dashboard') }}" class="nav-link  nav1" id="home"><i class="fa fa-dashboard"></i>
-                                <span>Dashboard</span></a>
+                                <span>Dashboard Admin</span></a>
                         </li>
                         <li>
                             <a href="{{ Route('liste.doctor') }}"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
                         <li>
-                            <a href="{{ Route('listePatient') }}" class="nav-link nav1"><i class="fa fa-wheelchair"></i>
+                            <a href="{{ Route('liste.patient') }}" class="nav-link nav1"><i class="fa fa-wheelchair"></i>
                                 <span>Patients</span></a>
                         </li>
                         <li>
-                            <a href="" class="nav-link nav1"><i class="fa fa-calendar-check-o"></i>
-                                <span>Doctor Schedule</span></a>
+                            <a href="{{ Route('liste.verification') }}" class="nav-link nav1"><i class="fa fa-calendar-check-o"></i>
+                                <span>Verification</span><span class="badge badge-pill bg-danger float-right">{{ \App\Http\Controllers\AdminController::countUnverifiedMedecins() }}</span></a>
                         </li>
                         <li>
                             <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>

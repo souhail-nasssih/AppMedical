@@ -83,7 +83,17 @@ Route::delete('/Ord/{id}', [OrdMedicamentController::class, 'destroy'])->name('d
 Route::delete('/ordAnalyse/{id}',[OrdAnaliseRadioController::class, 'destroy'])->name('detailOrdalayse.destroy');
 Route::post('/ajoute-patient',[MedecinPatientController::class, 'store'])->name('medecin.patient.store');
 Route::get('/medecin/profile/{id}', [MedecinController::class, 'show'])->name('medecin.show');
-Route::get('/admin/medecin', [MedecinController::class, 'indexMedecin'])->name('liste.doctor');
+//route de admin
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/medecin', [AdminController::class, 'indexMedecin'])->name('liste.doctor');
+    Route::get('/patient', [AdminController::class, 'indexPatientAdmin'])->name('liste.patient');
+    Route::delete('/{id}', [AdminController::class, 'destroyPatient'])->name('patients.destroy');
+    Route::get('/ConsultPatient/{id}', [AdminController::class, 'indexConsultPatientAdmin'])->name('admin.consultPatient');
+    Route::get('/verification', [AdminController::class, 'verification'])->name('liste.verification');
+    Route::get('/verification/{id}', [AdminController::class, 'accepter'])->name('admin.accepter');
+    Route::delete('/medecin/{id}', [AdminController::class, 'medecindestroy'])->name('admin.medecindestroy');
+    Route::get('/profil/{id}', [AdminController::class, 'show'])->name('admin.show');
+});
 
 
 

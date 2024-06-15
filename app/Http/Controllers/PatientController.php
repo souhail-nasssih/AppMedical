@@ -39,6 +39,11 @@ class PatientController extends Controller
         }
     }
 
+    public function indexPatientAdmin(){
+        $patients = Patient::all();
+        return view('admin.listePatients', compact('patients'));
+
+    }
 
 
 
@@ -110,7 +115,12 @@ class PatientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //supprimer un patient
+        $patient = Patient::findOrFail($id);
+        $patient->delete();
+        //retouner back
+        return redirect()->back()->with('success', 'Patient supprimé avec succès.');
+
     }
     public function afficher(Request $request)
     {

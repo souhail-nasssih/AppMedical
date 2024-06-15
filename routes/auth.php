@@ -68,9 +68,9 @@ Route::middleware('auth')->group(function () {
         // Route::get('/{id}/ordonnances', [OrdMedicamentController::class, 'show'])->name('patients.ord');
         Route::get('/{id}/ordonnances', [OrdMedicamentController::class, 'index'])->name('patients.ord');
 
+        Route::post('/', [PatientController::class, 'store'])->name('patient.store');
+        Route::get('/allergies/{id}', [InfoPatientController::class, 'index'])->name('patients.allergies');
+        Route::post('/allergies', [InfoPatientController::class, 'store'])->name('allergies.store');
     });
-    Route::post('/', [PatientController::class, 'store'])->name('patient.store');
-    Route::get('/allergies/{id}', [InfoPatientController::class, 'index'])->name('patients.allergies');
-    Route::post('/allergies', [InfoPatientController::class, 'store'])->name('allergies.store');
 
 });
