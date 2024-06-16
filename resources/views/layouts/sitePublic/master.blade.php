@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> Medical HTML-5 Template </title>
+    <title>Gestion des Dossiers Médicaux</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -24,12 +24,10 @@
     <link rel="stylesheet" href="{{ asset('sitePublic/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('sitePublic/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('sitePublic/assets/css/style.css') }}">
-    
 </head>
 
 <body>
     <!-- ? Preloader Start -->
-
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
@@ -50,9 +48,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="index.html"><img src="{{ asset('sitePublic/assets/img/logo/logo.png') }}"
-                                        alt="">
-                                </a>
+                                <a href="{{ Route('home') }}"><img src="{{ asset('sitePublic/assets/img/logo/logo.png') }}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
@@ -61,8 +57,9 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
+                                            <li><a href="{{ Route('home') }}">Accueil</a></li>
+                                            <li><a href="{{ Route('pageDoctors') }}">Médecins</a></li>
+                                            <li><a href="about.html">À propos</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                         </ul>
                                     </nav>
@@ -77,7 +74,6 @@
                                             @endif
                                         </div>
                                     </a>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -94,11 +90,9 @@
 
     @yield('content')
 
-
-
     <footer>
         <!--? Footer Start-->
-        <div class="footer-area section-bg" data-background="assets/img/gallery/footer_bg.jpg">
+        <div class="footer-area section-bg" data-background="{{ asset('sitePublic/assets/img/gallery/footer_bg.jpg') }}">
             <div class="container">
                 <div class="footer-top footer-padding">
                     <div class="row d-flex justify-content-between">
@@ -106,19 +100,17 @@
                             <div class="single-footer-caption mb-50">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{{ asset('sitePublic/assets/img/logo/logo2_footer.png') }}" alt="Logo">
-                                    </a>
+                                    <a href="{{ Route('home') }}"><img src="{{ asset('sitePublic/assets/img/logo/logo2_footer.png') }}" alt="Logo"></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-5">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
-                                    <h4>About Us</h4>
+                                    <h4>À propos de nous</h4>
                                     <div class="footer-pera">
-                                        <p class="info1">Lorem igpsum doldfor sit amet, adipiscing elit, sed do eiusmod
-                                            tempor cergelit rgh. </p>
-                                        <p class="info1">Lorem ipsum dolor sit amet, adipiscing elit.</p>
+                                        <p class="info1">Notre application facilite la gestion des dossiers médicaux, améliore la communication entre les médecins et les patients, et garantit des soins de qualité.</p>
+                                        <p class="info1">Contactez-nous pour en savoir plus.</p>
                                     </div>
                                 </div>
                             </div>
@@ -127,23 +119,15 @@
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-number mb-50">
                                     <h4><span>+564 </span>7885 3222</h4>
-                                    <p>youremail@gmail.com</p>
+                                    <p>contact@medapp.com</p>
                                 </div>
                                 <!-- Form -->
                                 <div class="footer-form">
                                     <div id="mc_embed_signup">
-                                        <form target="_blank"
-                                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                            method="get" class="subscribe_form relative mail_part" novalidate="true">
-                                            <input type="email" name="EMAIL" id="newsletter-form-email"
-                                                placeholder=" Email Address " class="placeholder hide-on-focus"
-                                                onfocus="this.placeholder = ''"
-                                                onblur="this.placeholder = 'Your email address'">
+                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
+                                            <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Adresse email " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Votre adresse email'">
                                             <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit"
-                                                    class="email_icon newsletter-submit button-contactForm">
-                                                    Send
-                                                </button>
+                                                <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">Envoyer</button>
                                             </div>
                                             <div class="mt-10 info"></div>
                                         </form>
@@ -157,14 +141,8 @@
                     <div class="row d-flex justify-content-between align-items-center">
                         <div class="col-xl-9 col-lg-8">
                             <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;
-                                    <script>
-                                        document.write(new Date().getFullYear());
-                                    </script> All rights reserved | This template is made with <i
-                                        class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                        target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                <p>&copy;
+                                    <script>document.write(new Date().getFullYear());</script> Tous droits réservés | Ce template est réalisé avec <i class="fa fa-heart" aria-hidden="true"></i> par <a href="https://colorlib.com" target="_blank">Colorlib</a>
                                 </p>
                             </div>
                         </div>
@@ -181,7 +159,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Footer End-->
     </footer>
     <!-- Scroll Up -->
@@ -213,7 +190,6 @@
     <script src="{{ asset('sitePublic/assets/js/jquery.ajaxchimp.min.js') }}"></script>
     <script src="{{ asset('sitePublic/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('sitePublic/assets/js/main.js') }}"></script>
-    
 </body>
 
 </html>

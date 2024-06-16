@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/doctors', [MedecinController::class, 'indexMedecinAlternative'])->name('pageDoctors');
+;
+
 Route::get('/medecinAttend', function () {
     return view('medecin.attend');
 })->name('medecinAttend');

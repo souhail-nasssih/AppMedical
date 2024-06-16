@@ -24,8 +24,14 @@ class MedecinController extends Controller
     {
         //page admin dashbord
         $medecins = Medecin::all();
+        dd($medecins);
         return view('admin.listeDoctor',compact('medecins'));
     
+    }
+    public function indexMedecinAlternative()
+    {
+        $medecins = Medecin::all();
+        return view('pageDoctor', compact('medecins'));
     }
 
     /**

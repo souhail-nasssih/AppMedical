@@ -21,7 +21,7 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="http://127.0.0.1:8000/" class="logo">
+                <a href="{{ Route('home') }}" class="logo">
                     <img src="{{ asset('sitePublic/assets/img/logo/loder.png') }}" width="35" height="35"
                         alt=""> <span>Medical</span>
                 </a>

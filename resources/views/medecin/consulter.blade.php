@@ -11,22 +11,46 @@
                     <br>
                     <h4 class="page-title">Consulter Patient</h4>
                 </div>
-            </div>
-            <div class="row">
+            </div>  <div class="row">
                 <div class="col-sm-12">
                     <div class="card card-box">
                         <div class="card-header">
-                            <h6 class="card-title text-bold">Détails du Patient</h6>
+                            <h6 class="card-title font-weight-bold">Informations du Patient</h6>
                         </div>
                         <div class="card-body">
-                            <div class="patient-details">
-                                <p><strong>Nom :</strong> {{ $patient->user->name }}</p>
-                                <p><strong>Email :</strong> {{ $patient->user->email }}</p>
-                                <p><strong>Téléphone :</strong> {{ $patient->tel }}</p>
-                                <p><strong>Adresse :</strong> {{ $patient->adress }}</p>
-                                <p><strong>Date de Naissance :</strong> {{ $patient->date_naissance }}</p>
-                                <p><strong>Groupe Sanguin :</strong> {{ $patient->groupes_sanguins }}</p>
-                                <p><strong>CIN :</strong> {{ $patient->CIN }}</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nom"><strong>Nom :</strong></label>
+                                        <p>{{ $patient->user->name }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email"><strong>Email :</strong></label>
+                                        <p>{{ $patient->user->email }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telephone"><strong>Téléphone :</strong></label>
+                                        <p>{{ $patient->tel }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="adresse"><strong>Adresse :</strong></label>
+                                        <p>{{ $patient->adress }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="date_naissance"><strong>Date de Naissance :</strong></label>
+                                        <p>{{ $patient->date_naissance }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="groupe_sanguin"><strong>Groupe Sanguin :</strong></label>
+                                        <p>{{ $patient->groupes_sanguins }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cin"><strong>CIN :</strong></label>
+                                        <p>{{ $patient->CIN }}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -66,11 +90,11 @@
                                 <path
                                     d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5zM10 8a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1" />
                             </svg>
-                            <i class="fa fa-x-ray mr-2"></i>Analyses/Radios
+                            <i class="fa fa-x-ray mr-2"></i>Ordonnances Analyses/Radios
                         </div>
                         <div class="card-body text-center">
                             <i class="fa fa-microscope fa-3x mb-3" style="color: #007bff;"></i>
-                            <p>Les Analyses / Les Radios</p>
+                            <p>Ordonnances Des Analyses / Des Radios</p>
                             <a href="{{ route('patients.analyse', ['id' => $patient->id]) }}"
                                 class="btn btn-primary">Consulter</a>
                         </div>
