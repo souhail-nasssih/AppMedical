@@ -1,18 +1,23 @@
 @extends('layouts.dashboardMedecin.master')
 
 @section('content')
+                            @php
+                                $patientId = request()->segment(2); // Récupérer le segment 2 de l'URL
+                            @endphp
     <div class="page-wrapper">
         <div class="content">
             <div class="row">
+                <div>
+                    <a href="{{ route('patients.show', $patientId) }}" class="btn btn-outline-primary take-btn float-left mb-5">
+                        <i class="fa fa-arrow-left mr-2"></i>Retour
+                    </a>
+                </div>
                 <div class="col-sm-12">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="page-title">Analyses</h4>
                         <form action="{{ route('ordAnalyseRadio.store') }}" method="POST">
                             @csrf
                             <!-- Récupérer l'ID du patient à partir de l'URL -->
-                            @php
-                                $patientId = request()->segment(2); // Récupérer le segment 2 de l'URL
-                            @endphp
                             <input type="hidden" name="patient_id" value="{{ $patientId }}">
                             <input type="hidden" name="medecin_id" value="{{ Auth::user()->medecin->id }}">
                             <input type="hidden" name="date" value="{{ now()->toDateString() }}">

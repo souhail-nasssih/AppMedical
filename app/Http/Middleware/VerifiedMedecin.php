@@ -15,13 +15,14 @@ class VerifiedMedecin
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next)
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        // Vérifiez si l'utilisateur est authentifié et a le rôle 'medecin' et n'est pas vérifié
-        if ($user && $user->role == 'medecin' && $user->medecin->verification==false) {
-            return redirect()->route('medecinAttend');
-        }
-        return $next($request);
+    // Vérifie si l'utilisateur est authentifié, a le rôle 'medecin' et si le médecin est non vérifié (s'il existe)
+    if ($user && $user->role == 'medecin' && (!$user->medecin || $user->medecin->verification == false)) {
+        return redirect()->route('medecinAttend');  
     }
+    return $next($request);
+}
+
 }

@@ -1,11 +1,11 @@
-@extends('layouts.dashboardMedecin.master')
+@extends('layouts.dashboardPatient.master')
 
 @section('content')
     <div class="page-wrapper">
         <div class="content" id="printableArea">
             <div class="row">
                 <div class="col-sm-5 col-4">
-                    <h4 class="page-title">Détails de l'Ordonnance</h4>
+                    <h4 class="page-title">Ordonnance</h4>
                 </div>
                 <div class="col-sm-7 col-8 text-right m-b-30">
                     <button onclick="printDiv('printableArea')" class="btn btn-primary">
@@ -49,18 +49,18 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div>
-                                    <h4 class="m-b-10"><strong>Médicaments</strong></h4>
+                                    <h4 class="m-b-10"><strong>Médicament</strong></h4>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Nom Médicament</th>
+                                                <th>Nom Medicament</th>
                                                 <th>Utilisation</th>
-                                                <th>Période</th>
+                                                <th>Periode</th>
                                                 <th>Remarque</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($ordonnance->detailOrdMeds as $detail)
+                                            @foreach ($detailOrdonnance as $detail)
                                                 <tr>
                                                     <td>{{ $detail->nom_medicament }}</td>
                                                     <td>{{ $detail->utilisation }}</td>
@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         function printDiv(divName) {
             var printContents = document.getElementById(divName).innerHTML;

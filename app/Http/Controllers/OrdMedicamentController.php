@@ -15,10 +15,11 @@ class OrdMedicamentController extends Controller
     public function index($id)
     {
         // Récupérer les ordonnances médicamenteuses associées au patient spécifié
+        $idp=$id;
         $patient = Patient::findOrFail($id);
         $ordonnances = $patient->ordonance_medicaments()->with('medecin')->get();
         
-        return view('medecin.ordonnances', compact('ordonnances'));
+        return view('medecin.ordonnances', compact('ordonnances','id'));
     }
 
 

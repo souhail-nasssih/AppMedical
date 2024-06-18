@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailOrdAnalyseRadio;
+use App\Models\DetailOrdMed;
 use App\Models\InfoMedical;
+use App\Models\Medecin;
+use App\Models\OrdAnalyseRadio;
 use App\Models\OrdMedicament;
 use App\Models\Patient;
 use App\Models\User;
@@ -39,12 +43,11 @@ class PatientController extends Controller
         }
     }
 
-    public function indexPatientAdmin(){
+    public function indexPatientAdmin()
+    {
         $patients = Patient::all();
         return view('admin.listePatients', compact('patients'));
-
     }
-
 
 
 
@@ -89,9 +92,17 @@ class PatientController extends Controller
     {
         // Récupérer le patient par son ID avec les informations de l'utilisateur associé
         $patient = Patient::with('user')->findOrFail($id);
-
+        
         // Retourner la vue avec les détails du patient
         return view('medecin.consulter', compact('patient'));
+    }
+    public function showPatient()
+    {
+        // Récupérer le patient par son ID avec les informations de l'utilisateur associé
+        $patient = Patient::all();
+
+        // Retourner la vue avec les détails du patient
+        return view('admin.dashboard', compact('patient'));
     }
 
     /**
@@ -115,18 +126,13 @@ class PatientController extends Controller
      */
     public function destroy(string $id)
     {
-        //supprimer un patient
         $patient = Patient::findOrFail($id);
         $patient->delete();
-        //retouner back
         return redirect()->back()->with('success', 'Patient supprimé avec succès.');
-
     }
     public function afficher(Request $request)
     {
         $cin = $request->input('cin');
-
-        // Charger les utilisateurs avec leurs patients filtrés par CIN
         $users = User::whereHas('patients', function ($query) use ($cin) {
             $query->where('CIN', $cin);
         })->with(['patients' => function ($query) use ($cin) {
@@ -135,17 +141,6 @@ class PatientController extends Controller
 
         return view('medecin.recherche', compact('users'));
     }
-    // public function ordonnanceStats()
-    // {
-    //     $ordonnances = OrdMedicament::all();
-    //     return view('medecin.ordonnances', compact('ordonnances'));
-    // }
-
-    // public function analyses()
-    // {
-    //     $analyses = AnalyseRadio::all();
-    //     return view('medecin.analyses', compact('analyses'));
-    // }
 
     public function maladieChroniqueStats()
     {
@@ -158,4 +153,51 @@ class PatientController extends Controller
         $allergies = InfoMedical::where('type', 'allergie')->get();
         return view('medecin.allergies', compact('allergies'));
     }
+
+    public function patientOrdonnances(String $id)
+    {
+        $ordonnances = OrdMedicament::where('patient_id', $id)->get();
+        return view('patient.ordonnances', compact('ordonnances'));
+    }
+
+    public function ordonnancedetails(String $id)
+    {
+        $ordonnance = OrdMedicament::findOrFail($id);
+        $detailOrdonnance = DetailOrdMed::where('ordMedicament_id', $ordonnance->id)->latest()->get();
+
+        // dd($detailOrdonnance);
+        return view('patient.ordonnancedetails', compact('ordonnance', 'detailOrdonnance'));
+    }
+
+    public static function ordonnancedetailsProfile($id)
+    {
+        $ordonnance = OrdMedicament::findOrFail($id);
+        $detailOrdonnance = DetailOrdMed::where('ordMedicament_id', $ordonnance->id)->get();
+        return $detailOrdonnance;
+    }
+
+    public function patientOrdonnancesAnalyse(String $id)
+    {
+        // Récupérer les ordonnances du patient
+        $ordonnances = OrdAnalyseRadio::where('patient_id', $id)->latest()->get();
+        return view('patient.ordAnalyse', compact('ordonnances'));
+    }
+    public function ordonnancedetailsAR(String $id)
+{
+    $ordonnance = OrdAnalyseRadio::findOrFail($id);
+    $detailOrdonnance = DetailOrdAnalyseRadio::where('ordAnalyseRadio_id', $ordonnance->id)->latest()->get();
+
+    return view('patient.ordAnalyseDetails', compact('ordonnance', 'detailOrdonnance'));
 }
+//afficher toues les medecin qui ont relation avec ce patient 
+public function medecinPatient(String $id)
+{
+    $medecins = Medecin::whereHas('patients', function ($query) use ($id) {
+        $query->where('patients.id', $id);
+    })->get();
+    return view('patient.medecinPatient', compact('medecins'));
+}
+
+}
+
+

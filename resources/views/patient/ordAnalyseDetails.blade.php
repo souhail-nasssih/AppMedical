@@ -1,11 +1,11 @@
-@extends('layouts.dashboardMedecin.master')
+@extends('layouts.dashboardPatient.master')
 
 @section('content')
     <div class="page-wrapper">
         <div class="content" id="printableArea">
             <div class="row">
                 <div class="col-sm-5 col-4">
-                    <h4 class="page-title">Détails de l'Ordonnance</h4>
+                    <h4 class="page-title">Ordonnance Analyse Radio</h4>
                 </div>
                 <div class="col-sm-7 col-8 text-right m-b-30">
                     <button onclick="printDiv('printableArea')" class="btn btn-primary">
@@ -41,31 +41,29 @@
                                         <h5 class="mb-0"><strong>{{ $ordonnance->patient->user->name }}</strong></h5>
                                     </li>
                                     <li><span>Patient</span></li>
-                                    <li>Employee ID: {{ $ordonnance->patient->id }}</li>
-                                    <li>Joining Date: {{ $ordonnance->patient->adress }}</li>
+                                    <li>ID de l'employé: {{ $ordonnance->patient->id }}</li>
+                                    <li>Date d'adhésion: {{ $ordonnance->patient->adress }}</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div>
-                                    <h4 class="m-b-10"><strong>Médicaments</strong></h4>
+                                    <h4 class="m-b-10"><strong>Détails de l'Analyse Radio</strong></h4>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Nom Médicament</th>
-                                                <th>Utilisation</th>
-                                                <th>Période</th>
-                                                <th>Remarque</th>
+                                                <th>Nom</th>
+                                                <th>Type</th>
+                                                <th>Détail</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($ordonnance->detailOrdMeds as $detail)
+                                            @foreach ($detailOrdonnance as $detail)
                                                 <tr>
-                                                    <td>{{ $detail->nom_medicament }}</td>
-                                                    <td>{{ $detail->utilisation }}</td>
-                                                    <td>{{ $detail->periode }}</td>
-                                                    <td>{{ $detail->remarque }}</td>
+                                                    <td>{{ $detail->nom }}</td>
+                                                    <td>{{ $detail->type }}</td>
+                                                    <td>{{ $detail->detail }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

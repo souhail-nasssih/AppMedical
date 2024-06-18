@@ -74,8 +74,8 @@
                                                     <td>{{ $patient->tel }}</td>
                                                     <td>{{ $patient->date_naissance }}</td>
                                                     <td>{{ $patient->groupes_sanguins }}</td>
-                                                    <td>
-                                                        <a href="{{ route('patients.show', $patient->id) }}"
+                                                    <td>patients.show
+                                                        <a href="{{ route('', $patient->id) }}"
                                                             class="btn btn-primary btn-sm">Consulter</a>
                                                     </td>
                                                     <td>

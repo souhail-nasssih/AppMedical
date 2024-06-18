@@ -1,113 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>MyResume Bootstrap Template - Index</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('patient/assets/vendor/aos/aos.css') }}" rel="stylesheet">
-    <link href="{{ asset('patient/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('patient/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('patient/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('patient/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('patient/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-    
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('patient/assets/css/style.css') }}" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: MyResume
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Updated: Mar 17 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <title>Medical</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/fullcalendar.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('dashboardMedecin/assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/style.css') }}">
+    {{-- <!--[if lt IE 9]>
+        <script src="{{ asset('dashboardMedecin/assets/js/html5shiv.min.js') }}"></script>
+        <script src="{{ asset('dashboardMedecin/assets/js/respond.min.js') }}"></script>
+    <![endif]-->   --}}
 </head>
 
+
 <body>
+    <div class="main-wrapper">
+        <div class="header">
+            <div class="header-left">
+                <a href="{{ Route('home') }}" class="logo">
+                    <img src="{{ asset('sitePublic/assets/img/logo/loder.png') }}" width="35" height="35"
+                        alt=""> <span>Medical</span>
+                </a>
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <ul class="nav user-menu float-right">
 
-    <!-- ======= Mobile nav toggle button ======= -->
-    <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-    <i class="bi bi-list mobile-nav-toggle d-lg-none"></i>
-    <!-- ======= Header ======= -->
-    <header id="header" class="d-flex flex-column justify-content-center">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle"
+                                src="{{ asset('dashboardMedecin/assets/img/user.jpg') }}" width="40" alt="Admin">
+                            <span class="status online"></span></span>
+                        <span>{{ Auth::user()->name }}</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('medecin.show', Auth::user()->id) }}">My Profile</a>
+                        <!-- For the logout route, use a form to handle the POST request -->
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
 
-        <nav id="navbar" class="navbar nav-menu">
-            <ul>
-                <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a>
-                </li>
-                <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-                <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a>
-                </li>
-                <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i>
-                        <span>Portfolio</span></a></li>
-                <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a>
-                </li>
-                <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+
+                    </div>
                 </li>
             </ul>
-        </nav><!-- .nav-menu -->
+            <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{{ route('profile.edit') }}">My Profile</a>
+                    <!-- For the logout route, use a form to handle the POST request -->
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
 
-    </header><!-- End Header -->
-    
-    @yield('content')
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="container">
-            <h3>Brandon Johnson</h3>
-            <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi
-                placeat.</p>
-            <div class="social-links">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-            <div class="copyright">
-                &copy; Copyright <strong><span>MyResume</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: [license-url] -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
             </div>
         </div>
-    </footer><!-- End Footer -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href="{{ Route('dashboard') }}" class="nav-link" id="home"><i
+                                    class="fa fa-dashboard {{ Route::currentRouteName() == 'dashboard' ? 'active-link' : '' }}"></i>
+                                <span>Profile</span></a>
+                        </li>
+                        {{-- <li>
+                            <a href="" class="nav-link nav1" id="doctors"><i
+                                    class="fa fa-user-md"></i>
+                                <span>Doctors</span></a>
+                        </li> --}}
+                        @php
+                            // je veux id de patient qui a une relation avec user qui est auth maintenant
+                            $idP = Auth::user()->id;
+                            $patient = App\Models\Patient::where('user_id', $idP)->first();
+                        @endphp
+                        <li>
+                            <a href="{{ route('patientOrdonnances', [$patient]) }}"
+                                class="nav-link {{ Route::currentRouteName() == 'patientOrdonnances' ? 'active-link' : '' }}">
+                                <i class="fa fa-user"></i>
+                                <span>Ordonnances</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('patientOrdonnancesAnalyse', [$patient]) }}"
+                                class="nav-link {{ Route::currentRouteName() == 'patientOrdonnancesAnalyse' ? 'active-link' : '' }}">
+                                <i class="fa fa-wheelchair"></i>
+                                <span>Analyses/Radio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('medecinsPatient', [$patient]) }}"
+                                class="nav-link {{ Route::currentRouteName() == 'medecinsPatient' ? 'active-link' : '' }}">
+                                <i class="fa fa-calendar-check-o"></i>
+                                <span>Médecins</span>
+                            </a>
+                        </li>
 
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-      <!-- JS Files -->
-<script src="{{ asset('patient/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/aos/aos.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/typed.js/typed.umd.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
-<script src="{{ asset('patient/assets/vendor/php-email-form/validate.js') }}"></script>
+                        <li>
+                            <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                        </li>
 
-<!-- Template Main JS File -->
-<script src="{{ asset('patient/assets/js/main.js') }}"></script>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @yield('content')
+
+
+        <div class="sidebar-overlay" data-reff=""></div>
+        <footer>
+            <script src="{{ asset('dashboardMedecin/assets/js/jquery-3.2.1.min.js') }}"></script>
+            <script src="{{ asset('dashboardMedecin/assets/js/popper.min.js') }}"></script>
+            <script src="{{ asset('dashboardMedecin/assets/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('dashboardMedecin/assets/js/jquery.slimscroll.js') }}"></script>
+            <script src="{{ asset('dashboardMedecin/assets/js/app.js') }}"></script>
+            <script src="{{ asset('dashboardMedecin/assets/js/Chart.bundle.js') }}"></script>
+            <script src="{{ asset('dashboardMedecin/assets/js/chart.js') }}"></script>
+            {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+            <script></script>
+
 </body>
 
 </html>
+</footer>

@@ -25,6 +25,12 @@
                 required />
             <x-input-error :messages="$errors->get('specialite')" class="mt-2" />
         </div>
+        <div class="mt-4">
+            <x-input-label for="verification" :value="__('verification')" />
+            <x-text-input id="verification" class="block mt-1 w-full" type="hidden" name="verification" :value="0"
+                required />
+            <x-input-error :messages="$errors->get('verification')" class="mt-2" />
+        </div>
 
         <!-- Professional Number -->
         <div class="mt-4">

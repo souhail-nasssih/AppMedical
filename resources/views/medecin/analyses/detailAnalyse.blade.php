@@ -9,6 +9,11 @@
                         <div class="col-sm-12 d-flex justify-content-between align-items-center mb-3">
                             <h4 class="page-title">Analyses</h4>
                         </div>
+                        <div>
+                            <a href="{{ route('patients.ord', $idPatient) }}" class="btn btn-outline-primary take-btn float-left">
+                                <i class="fa fa-arrow-left mr-2"></i> Retour
+                            </a>
+                        </div>
                     </div>
                     <!-- Afficher le message de succès -->
                     @if (session('success'))

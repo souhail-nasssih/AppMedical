@@ -75,24 +75,24 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="{{ Route('dashboard') }}" class="nav-link  nav1" id="home"><i class="fa fa-dashboard"></i>
+                            <a href="{{ Route('dashboard') }}" class="nav-link  {{ Route::currentRouteName() == 'dashboard' ? 'active-link' : '' }}" id="home"><i class="fa fa-dashboard"></i>
                                 <span>Dashboard Admin</span></a>
                         </li>
                         <li>
-                            <a href="{{ Route('liste.doctor') }}"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                            <a href="{{ Route('liste.doctor') }}" class="nav-link {{ Route::currentRouteName() == 'liste.doctor' ? 'active-link' : '' }}"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
                         <li>
-                            <a href="{{ Route('liste.patient') }}" class="nav-link nav1"><i class="fa fa-wheelchair"></i>
+                            <a href="{{ Route('liste.patient') }}" class="nav-link {{ Route::currentRouteName() == 'liste.patient' ? 'active-link' : '' }}"><i class="fa fa-wheelchair"></i>
                                 <span>Patients</span></a>
                         </li>
                         <li>
-                            <a href="{{ Route('liste.verification') }}" class="nav-link nav1"><i class="fa fa-calendar-check-o"></i>
+                            <a href="{{ Route('liste.verification') }}" class="nav-link  {{ Route::currentRouteName() == 'liste.verification' ? 'active-link' : '' }}"><i class="fa fa-calendar-check-o"></i>
                                 <span>Verification</span><span class="badge badge-pill bg-danger float-right">{{ \App\Http\Controllers\AdminController::countUnverifiedMedecins() }}</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
-                        </li>
-                        <li class="submenu">
+                        </li> --}}
+                        {{-- <li class="submenu">
                             <a href="#"><i class="fa fa-user"></i> <span> Employees </span> <span
                                     class="menu-arrow"></span></a>
                             <ul style="display: none;">
@@ -115,9 +115,9 @@
                         </li>
                         <li>
                             <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
-                        </li>
+                        </li> --}}
 
-                    </ul>
+                    </ul> 
                 </div>
             </div>
         </div>

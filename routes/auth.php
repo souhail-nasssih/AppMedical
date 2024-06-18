@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('medecin')->group(function () {
         Route::get('/', [MedecinController::class, 'index'])->name('medecin');
         Route::get('/create', [MedecinController::class, 'create'])->name('medecin.create');
-        Route::post('/', [MedecinController::class, 'store'])->name('medecin.store');
+        Route::post('/store', [MedecinController::class, 'store'])->name('medecin.store');
         // Route::get('/{id}/ordonnances', [OrdMedicamentController::class, 'show'])->name('patients.ord');
         Route::get('/{id}/ordonnances', [OrdMedicamentController::class, 'index'])->name('patients.ord');
 

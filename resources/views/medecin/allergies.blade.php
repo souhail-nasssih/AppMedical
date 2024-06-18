@@ -11,7 +11,7 @@
 
                     <!-- Lien de retour vers la page du patient -->
                     <div>
-                        <a href="{{ route('patients.show', ['id' => $patient->id]) }}" class="btn btn-primary btn">
+                        <a href="{{ route('patients.show', ['id' => $patient->id]) }}" class="btn btn-outline-primary take-btn btn">
                             <i class="fa fa-arrow-left mr-2"></i> Retour
                         </a>
                     </div>

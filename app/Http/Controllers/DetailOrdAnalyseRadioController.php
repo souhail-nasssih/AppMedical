@@ -41,12 +41,21 @@ class DetailOrdAnalyseRadioController extends Controller
 
     public function show(string $id)
     {
-        // Récupérer les détails d'analyses associés à l'ID de l'analyse
-        $analyses = DetailOrdAnalyseRadio::where('ordAnalyseRadio_id', $id)->get();
-
-        // Passer les détails à la vue
-        return view('medecin.analyses.detailAnalyse', compact('analyses', 'id'));
+        try {
+            // Récupérer les détails d'analyses associés à l'ID de l'analyse
+            $analyses = DetailOrdAnalyseRadio::where('ordAnalyseRadio_id', $id)->get();
+    
+            // Récupérer l'ID du patient associé à cette analyse
+            $idPatient = OrdAnalyseRadio::findOrFail($id)->patient_id;
+    
+            // Passer les détails et l'ID du patient à la vue
+            return view('medecin.analyses.detailAnalyse', compact('analyses', 'id', 'idPatient'));
+        } catch (\Exception $e) {
+            // Gérer l'erreur si l'analyse n'est pas trouvée
+            return redirect()->back()->with('error', 'Analyse non trouvée.');
+        }
     }
+    
 
 
 public function consult($id)

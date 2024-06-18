@@ -75,7 +75,7 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="{{ Route('dashboard') }}" class="nav-link  nav1" id="home"><i class="fa fa-dashboard"></i>
+                            <a href="{{ Route('dashboard') }}" class="nav-link  {{ Route::currentRouteName() == 'dashboard' ? 'active-link' : '' }}" id="home"><i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span></a>
                         </li>
                         {{-- <li>
@@ -84,11 +84,11 @@
                                 <span>Doctors</span></a>
                         </li> --}}
                         <li>
-                            <a href="{{ Route('search') }}" class="nav-link nav1" id="patients"><i class="fa fa-user"></i>
+                            <a href="{{ Route('search') }}" class="nav-link {{ Route::currentRouteName() == 'search' ? 'active-link' : '' }}" id="patients"><i class="fa fa-user"></i>
                                 <span>Recherche</span></a>
                         </li>
                         <li>
-                            <a href="{{ Route('listePatient') }}" class="nav-link nav1"><i class="fa fa-wheelchair"></i>
+                            <a href="{{ Route('listePatient') }}" class="nav-link {{ Route::currentRouteName() == 'listePatient' ? 'active-link' : '' }}"><i class="fa fa-wheelchair"></i>
                                 <span>Patients</span></a>
                         </li>
                         <li>

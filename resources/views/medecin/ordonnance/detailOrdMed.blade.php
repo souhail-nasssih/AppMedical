@@ -10,10 +10,10 @@
                             <h4 class="page-title">Detail Ordonnances</h4>
                         </div>
                         <div>
-
-                            <button onclick="window.history.back();" class="btn btn-primary">Retour</button>
+                            <a href="{{ route('patients.ord', $patientId) }}" class="btn btn-outline-primary take-btn float-left">
+                                <i class="fa fa-arrow-left mr-2"></i> Retour
+                            </a>
                         </div>
-
                     </div>
                     <!-- Afficher le message de succès -->
                     @if (session('success'))
@@ -22,9 +22,9 @@
                         </div>
                     @endif
                     @php
-                    // Extraire l'ID de l'URL
-                    $id = request()->segment(count(request()->segments()));
-                @endphp
+                        // Extraire l'ID de l'URL
+                        $id = request()->segment(count(request()->segments()));
+                    @endphp
                     <form action="{{ route('detailOrdMed.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="ordMedicament_id" value="{{ $id }}">
@@ -60,23 +60,23 @@
                             </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-primary">Ajouter</button>
-                                
-                                
-                                
-                                
-                                </div>
-                                </div>
-                                </form>
-                                @php
-                                    // Extraire l'ID de l'URL
-                                    $id = request()->segment(count(request()->segments()));
-                                @endphp
-                                <form action="{{ route('detailOrd.destroy', $id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn">Annuler</button>
-                                </form>
-                                
+
+
+
+
+                            </div>
+                        </div>
+                    </form>
+                    @php
+                        // Extraire l'ID de l'URL
+                        $id = request()->segment(count(request()->segments()));
+                    @endphp
+                    <form action="{{ route('detailOrd.destroy', $id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn">Annuler</button>
+                    </form>
+
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>

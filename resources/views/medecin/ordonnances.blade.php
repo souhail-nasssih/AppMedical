@@ -5,6 +5,11 @@
         <div class="content">
             <div class="row">
                 <div class="col-sm-12">
+                    <div>
+                        <a href="{{ route('patients.show', $id) }}" class="btn btn-outline-primary take-btn float-left mb-5">
+                            <i class="fa fa-arrow-left mr-2"></i> Retour
+                        </a>
+                    </div>
                     <div class="col-sm-12 d-flex justify-content-between align-items-center mb-3">
                         <h4 class="page-title">Ordonnances</h4>
                         <form action="{{ route('ordMedicament.store') }}" method="POST">

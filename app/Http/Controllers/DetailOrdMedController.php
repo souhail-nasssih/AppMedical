@@ -48,9 +48,17 @@ class DetailOrdMedController extends Controller
     {
         // Récupérer les détails d'ordonnances associés à l'ID de OrdMedicament
         $details = DetailOrdMed::where('ordMedicament_id', $id)->get();
-        // Passer les détails à la vue
-        return view('medecin.ordonnance.detailOrdMed', compact('details', 'id'));
+    
+        // Récupérer l'ordonnance (OrdMedicament) pour accéder au patient
+        $ordonnance = OrdMedicament::findOrFail($id);
+    
+        // Récupérer l'ID du patient à partir de l'ordonnance
+        $patientId = $ordonnance->patient_id;
+        
+        // Passer les détails et l'ID du patient à la vue
+        return view('medecin.ordonnance.detailOrdMed', compact('details', 'patientId'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

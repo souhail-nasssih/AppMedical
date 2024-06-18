@@ -51,7 +51,7 @@ class MedecinController extends Controller
         //
         $medecin = Medecin::create($request->all());
 
-        return redirect()->route('dashboard')->with('success', 'User created successfully.');
+        return view('medecin.dashboard');
     }
 
     /**

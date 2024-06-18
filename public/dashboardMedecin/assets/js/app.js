@@ -6,31 +6,31 @@ Version      : 1.0
 
 // Cette function pour le lien active
 //debut
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav1');
+// document.addEventListener('DOMContentLoaded', function() {
+//     const navLinks = document.querySelectorAll('.nav1');
 
-    // Charger l'état actif depuis le localStorage
-    const activeLinkId = localStorage.getItem('activeLinkId');
-    if (activeLinkId) {
-        const activeLink = document.getElementById(activeLinkId);
-        if (activeLink) {
-            activeLink.classList.add('active-link');
-        }
-    }
+//     // Charger l'état actif depuis le localStorage
+//     const activeLinkId = localStorage.getItem('activeLinkId');
+//     if (activeLinkId) {
+//         const activeLink = document.getElementById(activeLinkId);
+//         if (activeLink) {
+//             activeLink.classList.add('active-link');
+//         }
+//     }
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            // Supprimer la classe active de tous les liens
-            navLinks.forEach(link => link.classList.remove('active-link'));
+//     navLinks.forEach(link => {
+//         link.addEventListener('click', function(event) {
+//             // Supprimer la classe active de tous les liens
+//             navLinks.forEach(link => link.classList.remove('active-link'));
 
-            // Ajouter la classe active au lien cliqué
-            this.classList.add('active-link');
+//             // Ajouter la classe active au lien cliqué
+//             this.classList.add('active-link');
 
-            // Enregistrer l'état actif dans le localStorage
-            localStorage.setItem('activeLinkId', this.id);
-        });
-    });
-});
+//             // Enregistrer l'état actif dans le localStorage
+//             localStorage.setItem('activeLinkId', this.id);
+//         });
+//     });
+// });
 // fin
 
 /*  */

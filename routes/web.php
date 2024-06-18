@@ -17,8 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/doctors', [MedecinController::class, 'indexMedecinAlternative'])->name('pageDoctors');
-;
+Route::get('/doctors', [MedecinController::class, 'indexMedecinAlternative'])->name('pageDoctors');;
 
 Route::get('/medecinAttend', function () {
     return view('medecin.attend');
@@ -42,6 +41,7 @@ Route::get('/liste-patient', [PatientController::class, 'indexPatient'])->middle
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
+
     if ($user->role == 'patient') {
         return view('patient.dashboard');
     }
@@ -49,12 +49,18 @@ Route::get('/dashboard', function () {
     if ($user->role == 'medecin') {
         return view('medecin.dashboard');
     }
+
     if ($user->role == 'admin') {
-        return view('admin.dashboard');
+        // Redirection vers une route spécifique pour l'admin
+        return redirect()->route('patientDashboard');
     }
 
+    // Si le rôle de l'utilisateur n'est ni patient, ni médecin, ni admin, retourner à la page d'accueil avec un message d'erreur
     return redirect()->route('home')->with('error', 'Invalid user role.');
 })->middleware(['auth'])->name('dashboard');
+
+// Route spécifique pour le dashboard de l'admin
+Route::get('/patient/dashboard', [PatientController::class, 'showPatient'])->name('patientDashboard');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -69,11 +75,23 @@ Route::prefix('patients')->middleware('auth')->group(function () {
     Route::get('/{id}', [PatientController::class, 'show'])->name('patients.show');
     Route::get('/{id}/analyses', [PatientController::class, 'analyseStats'])->name('patients.analyse');
     Route::get('/{id}/maladies', [PatientController::class, 'maladieChroniqueStats'])->name('patients.maladie');
+    
 });
+Route::get('/Ord/{id}', [PatientController::class, 'patientOrdonnances'])->middleware('auth')->name('patientOrdonnances');
+Route::get('/OrdAnalyse/{id}', [PatientController::class, 'patientOrdonnancesAnalyse'])->middleware('auth')->name('patientOrdonnancesAnalyse');
+Route::get('/ordonnancedetails/{id}', [PatientController::class, 'ordonnancedetails'])->middleware('auth')->name('ordonnance.details');
+Route::get('/ordonnancedetailsAR/{id}', [PatientController::class, 'ordonnancedetailsAR'])->middleware('auth')->name('ordonnance.detailsAR');
+Route::get('/medecinsPatient/{id}', [PatientController::class, 'medecinPatient'])->middleware('auth')->name('medecinsPatient');
+
+
+
 
 Route::middleware(['auth', 'verified.medecin'])->prefix('medecin')->group(function () {
-    // Routes pour PatientController
     Route::get('/search', [PatientController::class, 'afficher'])->name('search');
+});
+
+Route::middleware('auth')->prefix('medecin')->group(function () {
+    // Routes pour PatientController
     Route::get('/{id}/radios', [PatientController::class, 'radios'])->name('patients.radios');
 
     // Routes pour OrdMedicamentController
