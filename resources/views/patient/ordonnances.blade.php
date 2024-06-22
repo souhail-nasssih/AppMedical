@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <div class="card-box">
                     <div class="card-block">
-                        <h5 class="text-bold card-title">Striped Rows</h5>
+                        <h5 class="text-bold card-title">Information d'Ordonnance</h5>
                         <div class="table-responsive">
                             <table class="table table-striped mb-0">
                                 <thead>

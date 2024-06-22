@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('dashboardMedecin/assets/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/style.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('sitePublic/assets/img/favicon.ico') }}">
+
     {{-- <!--[if lt IE 9]>
         <script src="{{ asset('dashboardMedecin/assets/js/html5shiv.min.js') }}"></script>
         <script src="{{ asset('dashboardMedecin/assets/js/respond.min.js') }}"></script>
@@ -38,11 +40,11 @@
                         <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('medecin.show',Auth::user()->id) }}">My Profile</a>
+                        <a class="dropdown-item" href="{{ route('medecin.show',Auth::user()->id) }}">Profile</a>
                         <!-- For the logout route, use a form to handle the POST request -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
+                            Déconnexion
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -56,11 +58,11 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                         class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ route('profile.edit') }}">My Profile</a>
+                    <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
                     <!-- For the logout route, use a form to handle the POST request -->
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
+                        Déconnexion
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

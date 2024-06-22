@@ -42,7 +42,7 @@
                                     <div class="col-md-7">
                                         <ul class="personal-info">
                                             <li>
-                                                <span class="title">Phone:</span>
+                                                <span class="title">Téléphone:</span>
                                                 <span class="text"><a
                                                         href="tel:770-889-6484">{{ $patient->tel }}</a></span>
                                             </li>
@@ -52,7 +52,7 @@
                                                         href="mailto:example@example.com">{{ $patient->user->email }}</a></span>
                                             </li>
                                             <li>
-                                                <span class="title">Birthday:</span>
+                                                <span class="title">Date de Naissance:</span>
                                                 <span class="text">{{ $patient->date_naissance }}</span>
                                             </li>
                                             <li>
@@ -150,9 +150,9 @@
                                                         <td>{{ $ordonnance->date }}</td>
                                                         <td>
                                                             <a
-                                                                href="{{ route('ordonnance.details', ['id' => $ordonnance->id]) }}">Voir
+                                                                href="{{ route('ordonnance.detailsAR', ['id' => $ordonnance->id]) }}">Voir
                                                                 détails</a> <!-- Ajustez la route -->
-                                                        </td>
+                                                        </td> <!-- Ajustez la route -->
                                                     </tr>
                                                 @endforeach
                                             </tbody>

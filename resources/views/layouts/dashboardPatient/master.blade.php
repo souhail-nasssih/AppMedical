@@ -8,8 +8,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/fullcalendar.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/select2.min.css') }}">
     <link rel="stylesheet" type="text/css"
-        href="{{ asset('dashboardMedecin/assets/css/bootstrap-datetimepicker.min.css') }}">
+    href="{{ asset('dashboardMedecin/assets/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/style.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('sitePublic/assets/img/favicon.ico') }}">
     {{-- <!--[if lt IE 9]>
         <script src="{{ asset('dashboardMedecin/assets/js/html5shiv.min.js') }}"></script>
         <script src="{{ asset('dashboardMedecin/assets/js/respond.min.js') }}"></script>
@@ -18,6 +19,11 @@
 
 
 <body>
+    @php
+    // je veux id de patient qui a une relation avec user qui est auth maintenant
+    $idP = Auth::user()->id;
+    $patient = App\Models\Patient::where('user_id', $idP)->first();
+@endphp
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
@@ -38,11 +44,11 @@
                         <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('medecin.show', Auth::user()->id) }}">My Profile</a>
+                        <a class="dropdown-item" href="{{ route('ProfilePatient', [$patient]) }}">Profile</a>
                         <!-- For the logout route, use a form to handle the POST request -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
+                            Déconnexion
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -56,11 +62,11 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                         class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ route('profile.edit') }}">My Profile</a>
+                    <a class="dropdown-item" href="{{ route('ProfilePatient', [$patient]) }}">Profile</a>
                     <!-- For the logout route, use a form to handle the POST request -->
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
+                        Déconnexion
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -77,18 +83,14 @@
                         <li>
                             <a href="{{ Route('dashboard') }}" class="nav-link" id="home"><i
                                     class="fa fa-dashboard {{ Route::currentRouteName() == 'dashboard' ? 'active-link' : '' }}"></i>
-                                <span>Profile</span></a>
+                                <span>Accueil</span></a>
                         </li>
                         {{-- <li>
                             <a href="" class="nav-link nav1" id="doctors"><i
                                     class="fa fa-user-md"></i>
                                 <span>Doctors</span></a>
                         </li> --}}
-                        @php
-                            // je veux id de patient qui a une relation avec user qui est auth maintenant
-                            $idP = Auth::user()->id;
-                            $patient = App\Models\Patient::where('user_id', $idP)->first();
-                        @endphp
+                 
                         <li>
                             <a href="{{ route('patientOrdonnances', [$patient]) }}"
                                 class="nav-link {{ Route::currentRouteName() == 'patientOrdonnances' ? 'active-link' : '' }}">
@@ -112,7 +114,9 @@
                         </li>
 
                         <li>
-                            <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                            <a href="{{ route('ProfilePatient', [$patient]) }}"
+                                class="nav-link {{ Route::currentRouteName() == 'ProfilePatient' ? 'active-link' : '' }}"><i
+                                    class="fa fa-cog"></i> <span>Profile</span></a>
                         </li>
 
                     </ul>

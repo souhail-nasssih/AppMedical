@@ -42,6 +42,7 @@ class PatientController extends Controller
             return redirect()->back()->with('error', 'Médecin non trouvé.');
         }
     }
+    
 
     public function indexPatientAdmin()
     {
@@ -92,7 +93,7 @@ class PatientController extends Controller
     {
         // Récupérer le patient par son ID avec les informations de l'utilisateur associé
         $patient = Patient::with('user')->findOrFail($id);
-        
+
         // Retourner la vue avec les détails du patient
         return view('medecin.consulter', compact('patient'));
     }
@@ -183,21 +184,57 @@ class PatientController extends Controller
         return view('patient.ordAnalyse', compact('ordonnances'));
     }
     public function ordonnancedetailsAR(String $id)
+    {
+        $ordonnance = OrdAnalyseRadio::findOrFail($id);
+        $detailOrdonnance = DetailOrdAnalyseRadio::where('ordAnalyseRadio_id', $ordonnance->id)->latest()->get();
+
+        return view('patient.ordAnalyseDetails', compact('ordonnance', 'detailOrdonnance'));
+    }
+    //afficher toues les medecin qui ont relation avec ce patient 
+    public function medecinPatient(String $id)
+    {
+        $medecins = Medecin::whereHas('patients', function ($query) use ($id) {
+            $query->where('patients.id', $id);
+        })->get();
+        return view('patient.medecinPatient', compact('medecins'));
+    }
+    // show profil patient 
+    public function profilPatient(String $id)
+    {
+        $user = Auth::user(); // Utilisateur authentifié
+        $patient = Patient::with('user')->findOrFail($id); // Inclure la relation 'user'
+        return view('patient.profile', compact('patient', 'user'));
+    }
+    public function editProfile(string $id)
 {
-    $ordonnance = OrdAnalyseRadio::findOrFail($id);
-    $detailOrdonnance = DetailOrdAnalyseRadio::where('ordAnalyseRadio_id', $ordonnance->id)->latest()->get();
+    $patient = Patient::findOrFail($id);
+    return view('patient.modifierprofile', compact('patient'));
+}   
 
-    return view('patient.ordAnalyseDetails', compact('ordonnance', 'detailOrdonnance'));
-}
-//afficher toues les medecin qui ont relation avec ce patient 
-public function medecinPatient(String $id)
+public function updateProfile(Request $request)
 {
-    $medecins = Medecin::whereHas('patients', function ($query) use ($id) {
-        $query->where('patients.id', $id);
-    })->get();
-    return view('patient.medecinPatient', compact('medecins'));
+    $request->validate([
+        'id' => 'required',
+        'name' => 'required|string|max:255',
+        'tel' => 'required|string|max:20',
+        'email' => 'required|email|max:255',
+        'date_naissance' => 'required|date',
+        'adress' => 'required|string|max:255',
+        'groupes_sanguins' => 'required|string|max:3',
+    ]);
+
+    $patient = Patient::findOrFail($request->id);
+    $patient->user->name = $request->name;
+    $patient->user->email = $request->email;
+    $patient->tel = $request->tel;
+    $patient->date_naissance = $request->date_naissance;
+    $patient->adress = $request->adress;
+    $patient->groupes_sanguins = $request->groupes_sanguins;
+    $patient->user->save();
+    $patient->save();
+
+    return redirect()->route('ProfilePatient', ['id' => $patient->id])->with('success', 'Profile updated successfully.');
+} 
+
+    
 }
-
-}
-
-

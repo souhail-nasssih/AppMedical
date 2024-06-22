@@ -6,7 +6,7 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-7 col-6">
-                <h4 class="page-title">My Profile</h4>
+                <h4 class="page-title">Profile</h4>
             </div>
 
             <div class="col-sm-5 col-6 text-right m-b-30">

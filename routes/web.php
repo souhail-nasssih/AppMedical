@@ -82,7 +82,9 @@ Route::get('/OrdAnalyse/{id}', [PatientController::class, 'patientOrdonnancesAna
 Route::get('/ordonnancedetails/{id}', [PatientController::class, 'ordonnancedetails'])->middleware('auth')->name('ordonnance.details');
 Route::get('/ordonnancedetailsAR/{id}', [PatientController::class, 'ordonnancedetailsAR'])->middleware('auth')->name('ordonnance.detailsAR');
 Route::get('/medecinsPatient/{id}', [PatientController::class, 'medecinPatient'])->middleware('auth')->name('medecinsPatient');
-
+Route::get('/ProfilePatient/{id}', [PatientController::class, 'profilPatient'])->middleware('auth')->name('ProfilePatient');
+Route::get('/profile/patient/{id}', [PatientController::class, 'editProfile'])->middleware('auth')->name('profile.patient');
+Route::post('/profile/update', [PatientController::class, 'updateProfile'])->middleware('auth')->name('profile.update');
 
 
 
