@@ -43,8 +43,7 @@ class AdminController extends Controller
     {
         //afficher le profil de admin avec leur information 
         $admin = Auth::user();
-        return view('admin.profile', compact('admin'));        
-
+        return view('admin.profile', compact('admin'));
     }
 
 
@@ -74,9 +73,11 @@ class AdminController extends Controller
 
     public function indexPatientAdmin()
     {
-        $patients = Patient::all();
+        $patients = Patient::paginate(10); // Paginate par 10 patients par page
+    
         return view('admin.listePatients', compact('patients'));
     }
+    
     public function destroyPatient(string $id)
     {
         //supprimer un patient
@@ -123,10 +124,6 @@ class AdminController extends Controller
         avec succès.');
     }
 
-
-
-
-
     public static function countPatients()
     {
         return Patient::count();
@@ -146,6 +143,20 @@ class AdminController extends Controller
     public static function countUnverifiedMedecins()
     {
         return Medecin::where('verification', false)->count();
-    }  
+    }
 
+    public static function latestPatients()
+    {
+        // Récupérer les 5 derniers patients ajoutés
+        $patients = Patient::latest()->take(5)->get();
+
+        // Retourner la vue avec les données des patients
+        return  $patients;
+    }
+
+    public static function unverifiedMedecins()
+    {
+        // Récupérer les médecins non vérifiés
+        return Medecin::where('verification', false)->get();
+    }
 }

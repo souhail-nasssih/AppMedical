@@ -40,7 +40,7 @@
                         <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('medecin.show',Auth::user()->id) }}">Profile</a>
+                        <a class="dropdown-item" href="{{ route('medecin.show', Auth::user()->id) }}">Profile</a>
                         <!-- For the logout route, use a form to handle the POST request -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -77,7 +77,9 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="{{ Route('dashboard') }}" class="nav-link  {{ Route::currentRouteName() == 'dashboard' ? 'active-link' : '' }}" id="home"><i class="fa fa-dashboard"></i>
+                            <a href="{{ Route('dashboard') }}"
+                                class="nav-link  {{ Route::currentRouteName() == 'dashboard' ? 'active-link' : '' }}"
+                                id="home"><i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span></a>
                         </li>
                         {{-- <li>
@@ -86,17 +88,18 @@
                                 <span>Doctors</span></a>
                         </li> --}}
                         <li>
-                            <a href="{{ Route('search') }}" class="nav-link {{ Route::currentRouteName() == 'search' ? 'active-link' : '' }}" id="patients"><i class="fa fa-user"></i>
+                            <a href="{{ Route('search') }}"
+                                class="nav-link {{ Route::currentRouteName() == 'search' ? 'active-link' : '' }}"
+                                id="patients"><i class="fa fa-user"></i>
                                 <span>Recherche</span></a>
                         </li>
                         <li>
-                            <a href="{{ Route('listePatient') }}" class="nav-link {{ Route::currentRouteName() == 'listePatient' ? 'active-link' : '' }}"><i class="fa fa-wheelchair"></i>
+                            <a href="{{ Route('listePatient') }}"
+                                class="nav-link {{ Route::currentRouteName() == 'listePatient' ? 'active-link' : '' }}"><i
+                                    class="fa fa-wheelchair"></i>
                                 <span>Patients</span></a>
                         </li>
-                        <li>
-                            <a href="" class="nav-link nav1"><i class="fa fa-calendar-check-o"></i>
-                                <span>Doctor Schedule</span></a>
-                        </li>
+
                         <li>
                             <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                         </li>
@@ -110,17 +113,7 @@
                                 <li><a href="attendance.html">Attendance</a></li>
                             </ul>
                         </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-money"></i> <span> Accounts </span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="invoices.html">Invoices</a></li>
-                                <li><a href="payments.html">Payments</a></li>
-                                <li><a href="expenses.html">Expenses</a></li>
-                                <li><a href="taxes.html">Taxes</a></li>
-                                <li><a href="provident-fund.html">Provident Fund</a></li>
-                            </ul>
-                        </li>
+
                         <li>
                             <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
                         </li>

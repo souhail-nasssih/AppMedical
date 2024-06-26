@@ -76,7 +76,7 @@
                                                     <td>{{ $patient->groupes_sanguins }}</td>
                                                     <td>
                                                         <a href="{{ route('patients.show', $patient->id) }}"
-                                                            class="btn btn-primary btn-sm">Consulter</a>
+                                                            class="btn btn-primary ">Consulter</a>
                                                     </td>
                                                     <td>
                                                         <form action="{{ route('medecin.patient.store') }}" method="POST">
