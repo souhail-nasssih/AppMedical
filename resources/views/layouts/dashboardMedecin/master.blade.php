@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <title>Medical</title>
+    <title>MediTrack</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/fullcalendar.min.css') }}">
@@ -11,11 +11,6 @@
         href="{{ asset('dashboardMedecin/assets/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboardMedecin/assets/css/style.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('sitePublic/assets/img/favicon.ico') }}">
-
-    {{-- <!--[if lt IE 9]>
-        <script src="{{ asset('dashboardMedecin/assets/js/html5shiv.min.js') }}"></script>
-        <script src="{{ asset('dashboardMedecin/assets/js/respond.min.js') }}"></script>
-    <![endif]-->   --}}
 </head>
 
 
@@ -25,7 +20,7 @@
             <div class="header-left">
                 <a href="{{ Route('home') }}" class="logo">
                     <img src="{{ asset('sitePublic/assets/img/logo/loder.png') }}" width="35" height="35"
-                        alt=""> <span>Medical</span>
+                        alt=""> <span>MediTrack</span>
                 </a>
             </div>
             <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>

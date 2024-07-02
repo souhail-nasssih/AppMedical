@@ -96,4 +96,10 @@ class MedecinController extends Controller
     {
         //
     }
+    public function getMedecinsData()
+    {
+        $medecins = Medecin::all();
+
+        return response()->json($medecins);
+    }
 }

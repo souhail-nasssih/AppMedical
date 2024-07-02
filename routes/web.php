@@ -140,6 +140,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 
 
+// routes/web.php
+Route::get('/admin/patients/chart', [PatientController::class, 'getPatientData'])->name('admin.patients.chart');
+Route::get('/patients/data', [PatientController::class, 'getMonthlyPatientData']);
+Route::get('/medecins/data', [MedecinController::class, 'getMedecinsData'])->name('medecins.data');
+
 
 require __DIR__ . '/auth.php';
 

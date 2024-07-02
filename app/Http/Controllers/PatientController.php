@@ -10,12 +10,14 @@ use App\Models\OrdAnalyseRadio;
 use App\Models\OrdMedicament;
 use App\Models\Patient;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use GuzzleHttp\Middleware;
 use Illuminate\Database\QueryException;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\Return_;
 
 class PatientController extends Controller
@@ -42,7 +44,7 @@ class PatientController extends Controller
             return redirect()->back()->with('error', 'Médecin non trouvé.');
         }
     }
-    
+
 
     public function indexPatientAdmin()
     {
@@ -206,35 +208,56 @@ class PatientController extends Controller
         return view('patient.profile', compact('patient', 'user'));
     }
     public function editProfile(string $id)
+    {
+        $patient = Patient::findOrFail($id);
+        return view('patient.modifierprofile', compact('patient'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required|string|max:255',
+            'tel' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'date_naissance' => 'required|date',
+            'adress' => 'required|string|max:255',
+            'groupes_sanguins' => 'required|string|max:3',
+        ]);
+
+        $patient = Patient::findOrFail($request->id);
+        $patient->user->name = $request->name;
+        $patient->user->email = $request->email;
+        $patient->tel = $request->tel;
+        $patient->date_naissance = $request->date_naissance;
+        $patient->adress = $request->adress;
+        $patient->groupes_sanguins = $request->groupes_sanguins;
+        $patient->user->save();
+        $patient->save();
+
+        return redirect()->route('ProfilePatient', ['id' => $patient->id])->with('success', 'Profile updated successfully.');
+    }
+
+    public function getPatientData()
+    {
+        $patients = Patient::all();
+        return response()->json($patients);
+    }
+    public function getMonthlyPatientData()
 {
-    $patient = Patient::findOrFail($id);
-    return view('patient.modifierprofile', compact('patient'));
-}   
+    $monthlyData = Patient::selectRaw('COUNT(*) as count, MONTH(created_at) as month')
+        ->whereYear('created_at', Carbon::now()->year)
+        ->groupBy('month')
+        ->get()
+        ->keyBy('month')
+        ->toArray();
 
-public function updateProfile(Request $request)
-{
-    $request->validate([
-        'id' => 'required',
-        'name' => 'required|string|max:255',
-        'tel' => 'required|string|max:20',
-        'email' => 'required|email|max:255',
-        'date_naissance' => 'required|date',
-        'adress' => 'required|string|max:255',
-        'groupes_sanguins' => 'required|string|max:3',
-    ]);
+    $data = array_fill(1, 12, 0);
+    foreach ($monthlyData as $month => $value) {
+        $data[$month] = $value['count'];
+    }
 
-    $patient = Patient::findOrFail($request->id);
-    $patient->user->name = $request->name;
-    $patient->user->email = $request->email;
-    $patient->tel = $request->tel;
-    $patient->date_naissance = $request->date_naissance;
-    $patient->adress = $request->adress;
-    $patient->groupes_sanguins = $request->groupes_sanguins;
-    $patient->user->save();
-    $patient->save();
-
-    return redirect()->route('ProfilePatient', ['id' => $patient->id])->with('success', 'Profile updated successfully.');
-} 
-
+    return response()->json($data);
+}
     
 }

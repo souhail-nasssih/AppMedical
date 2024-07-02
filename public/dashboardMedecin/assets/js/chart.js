@@ -1,7 +1,5 @@
 $(document).ready(function() {
 	
-	// Bar Chart
-
 	var barChartData = {
 		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
 		datasets: [{
