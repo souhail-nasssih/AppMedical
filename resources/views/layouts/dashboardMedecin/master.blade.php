@@ -118,6 +118,7 @@
             </div>
         </div>
         @yield('content')
+        @yield('script')
 
 
         <div class="sidebar-overlay" data-reff=""></div>
@@ -128,7 +129,7 @@
             <script src="{{ asset('dashboardMedecin/assets/js/jquery.slimscroll.js') }}"></script>
             <script src="{{ asset('dashboardMedecin/assets/js/app.js') }}"></script>
             <script src="{{ asset('dashboardMedecin/assets/js/Chart.bundle.js') }}"></script>
-            <script src="{{ asset('dashboardMedecin/assets/js/chart.js') }}"></script>
+            {{-- <script src="{{ asset('dashboardMedecin/assets/js/chart.js') }}"></script> --}}
             {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
             <script></script>
 

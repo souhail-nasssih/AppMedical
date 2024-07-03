@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="page-title">Allergies/Maladies Chroniques de {{ $patient->nom }} {{ $patient->prenom }}</h4>
+                        <h4 class="page-title">Allergies/Maladies Chroniques de {{ $patient->user->name }} </h4>
                     </div>
 
                     <!-- Lien de retour vers la page du patient -->

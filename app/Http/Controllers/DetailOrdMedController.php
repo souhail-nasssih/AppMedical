@@ -47,7 +47,7 @@ class DetailOrdMedController extends Controller
     public function show(string $id)
     {
         // Récupérer les détails d'ordonnances associés à l'ID de OrdMedicament
-        $details = DetailOrdMed::where('ordMedicament_id', $id)->get();
+        $details = DetailOrdMed::where('ordMedicament_id', $id)->get(); 
     
         // Récupérer l'ordonnance (OrdMedicament) pour accéder au patient
         $ordonnance = OrdMedicament::findOrFail($id);

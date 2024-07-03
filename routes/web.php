@@ -145,6 +145,11 @@ Route::get('/admin/patients/chart', [PatientController::class, 'getPatientData']
 Route::get('/patients/data', [PatientController::class, 'getMonthlyPatientData']);
 Route::get('/medecins/data', [MedecinController::class, 'getMedecinsData'])->name('medecins.data');
 
+// web.php
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/medecin/patient_chart_data', [MedecinController::class, 'patientChartData'])->name('medecin.patient_chart_data');
+});
 
 require __DIR__ . '/auth.php';
 

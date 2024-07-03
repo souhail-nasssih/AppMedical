@@ -10,7 +10,7 @@
                             <h4 class="page-title">Analyses</h4>
                         </div>
                         <div>
-                            <a href="{{ route('patients.ord', $idPatient) }}" class="btn btn-outline-primary take-btn float-left">
+                            <a href="{{ route('patients.analyse', $idPatient) }}" class="btn btn-outline-primary take-btn float-left">
                                 <i class="fa fa-arrow-left mr-2"></i> Retour
                             </a>
                         </div>
