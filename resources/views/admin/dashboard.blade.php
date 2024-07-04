@@ -42,8 +42,6 @@
                         <div class="card-body">
                             <div class="chart-title">
                                 <h4>Patient</h4>
-                                <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than
-                                    Last Month</span>
                             </div>
                             <canvas id="patientChart"></canvas>
                         </div>

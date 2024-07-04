@@ -13,7 +13,7 @@
             <div class="card-body">
                 <form method="POST" action="{{ route('profile.update') }}">
                     @csrf
-                    <input type="text" class="form-control" id="id" name="id" value="{{ $patient->id }}" required>
+                    <input type="hidden" class="form-control" id="id" name="id" value="{{ $patient->id }}" required>
                     <div class="form-group">
                         <label for="name">Nom : </label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ $patient->user->name }}" required>
